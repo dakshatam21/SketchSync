@@ -19,7 +19,7 @@ A modern and responsive **Interactive Whiteboard Web Application** built using *
 
 ## 🚀 Live Demo
 
-**Website:** https://YOUR_USERNAME.github.io/SketchSync/
+**Website:** https://github.com/dakshatam21/SketchSync/
 
 ---
 
