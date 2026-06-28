@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>SketchSync — Real-Time Whiteboard</title>
+  <meta name="description" content="A premium digital whiteboard. Sketch, sync your ideas, and bring them to life." />
+
+  <!-- Google Fonts: Fraunces (display), Inter (body/UI), JetBrains Mono (stats/data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#home" class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="30" height="30" fill="none">
+            <path d="M6 30 Q14 8 20 20 T34 10" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <circle cx="34" cy="10" r="2.6" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="brand__name">SketchSync</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="nav-links__item">Home</a>
+        <a href="#features" class="nav-links__item">Features</a>
+        <a href="#whiteboard" class="nav-links__item">Whiteboard</a>
+        <a href="#about" class="nav-links__item">About</a>
+      </nav>
+
+      <div class="navbar__actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M21 12.4A9 9 0 1 1 11.6 3a7 7 0 0 0 9.4 9.4Z"/>
+          </svg>
+        </button>
+        <a href="#whiteboard" class="btn btn--primary btn--sm">Open Board</a>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="home">
+    <div class="hero__bg" aria-hidden="true">
+      <svg class="hero__grid" width="100%" height="100%" preserveAspectRatio="none">
+        <defs>
+          <pattern id="gridPattern" width="36" height="36" patternUnits="userSpaceOnUse">
+            <path d="M36 0H0V36" fill="none" stroke="currentColor" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#gridPattern)" />
+      </svg>
+    </div>
+
+    <div class="hero__inner">
+      <div class="hero__copy">
+        <span class="eyebrow">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12l4 4L19 6"/></svg>
+          Free • No sign-up • Works in your browser
+        </span>
+        <h1 class="hero__title">
+          Bring Your Ideas <br/>
+          <span class="hero__title-accent">to Life</span>
+        </h1>
+        <p class="hero__desc">
+          SketchSync is a fast, distraction-free whiteboard for sketching diagrams, mapping out ideas,
+          and thinking out loud — right in your browser. Pen, shapes, color, undo/redo, and export, all built for the canvas.
+        </p>
+        <div class="hero__cta">
+          <a href="#whiteboard" class="btn btn--primary btn--lg">
+            Start Drawing
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#features" class="btn btn--ghost btn--lg">See features</a>
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat"><strong>6</strong><span>Drawing tools</span></div>
+          <div class="hero__stat"><strong>0ms</strong><span>Setup time</span></div>
+          <div class="hero__stat"><strong>100%</strong><span>Client-side</span></div>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="doodle-card">
+          <div class="doodle-card__bar">
+            <span class="doodle-dot doodle-dot--orange"></span>
+            <span class="doodle-dot doodle-dot--blue"></span>
+            <span class="doodle-dot doodle-dot--green"></span>
+            <span class="doodle-card__label">untitled-board.sketch</span>
+          </div>
+          <canvas id="heroCanvas" class="doodle-card__canvas" aria-hidden="true"></canvas>
+          <p class="doodle-card__hint">try drawing here ✦</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="features" id="features">
+    <div class="section-head">
+      <span class="eyebrow eyebrow--center">What you get</span>
+      <h2 class="section-title">Everything a sketch needs.<br/>Nothing it doesn't.</h2>
+      <p class="section-desc">A focused toolkit built directly on the Canvas API — light enough to feel instant, complete enough to finish the thought.</p>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <div class="feature-card__icon" style="--tint:#FF5A36">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        </div>
+        <h3>Freehand Pen</h3>
+        <p>Smooth, pressure-friendly strokes that follow your cursor or finger without lag or jitter.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-card__icon" style="--tint:#2D5BFF">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H9l-7-7 11-11 7 7-9 9"/><path d="M3 13l7 7"/></svg>
+        </div>
+        <h3>Smart Eraser</h3>
+        <p>Wipe out exactly what you don't need with an adjustable eraser radius.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-card__icon" style="--tint:#19A974">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20L20 4"/></svg>
+        </div>
+        <h3>Shapes &amp; Lines</h3>
+        <p>Straight lines, rectangles, circles, and arrows snap into place as you drag.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-card__icon" style="--tint:#A93BD6">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-5 4 4 8-8"/><path d="M14 6h6v6"/></svg>
+        </div>
+        <h3>Undo &amp; Redo</h3>
+        <p>Full history stack — step backward and forward through every stroke you've made.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-card__icon" style="--tint:#E2A300">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C22 6.012 17.461 2 12 2z"/></svg>
+        </div>
+        <h3>Full Color Control</h3>
+        <p>Pick any color, scale brush size live, and preview your stroke before you draw.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-card__icon" style="--tint:#FF5A36">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        </div>
+        <h3>Export Anytime</h3>
+        <p>Download your board as a crisp PNG or compressed JPG with one click.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== WHITEBOARD ===================== -->
+  <section class="whiteboard-section" id="whiteboard">
+    <div class="section-head">
+      <span class="eyebrow eyebrow--center">The board</span>
+      <h2 class="section-title">Your canvas, ready when you are</h2>
+      <p class="section-desc">Pick a tool, pick a color, and start sketching. Every action below is live.</p>
+    </div>
+
+    <div class="board-shell">
+
+      <!-- Toolbar -->
+      <div class="toolbar" id="toolbar" role="toolbar" aria-label="Drawing tools">
+
+        <div class="toolbar__group" data-group="tools">
+          <button class="tool-btn is-active" data-tool="pen" title="Pen (P)" aria-label="Pen tool">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="eraser" title="Eraser (E)" aria-label="Eraser tool">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H9l-7-7 11-11 7 7-9 9"/><path d="M3 13l7 7"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="line" title="Straight Line (L)" aria-label="Line tool">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20L20 4"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="rectangle" title="Rectangle (R)" aria-label="Rectangle tool">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="1.5"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="circle" title="Circle (C)" aria-label="Circle tool">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>
+          </button>
+          <button class="tool-btn" data-tool="arrow" title="Arrow (A)" aria-label="Arrow tool">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19L19 5"/><path d="M9 5h10v10"/></svg>
+          </button>
+        </div>
+
+        <div class="toolbar__divider"></div>
+
+        <div class="toolbar__group toolbar__group--color">
+          <label class="color-swatch" title="Pick a color">
+            <input type="color" id="colorPicker" value="#1a1a1a" aria-label="Brush color" />
+            <span class="color-swatch__ring" style="--c:#1a1a1a"></span>
+          </label>
+          <div class="palette" id="palette">
+            <button class="palette__dot is-active" style="--c:#1A1A1A" data-color="#1A1A1A" aria-label="Black"></button>
+            <button class="palette__dot" style="--c:#FF5A36" data-color="#FF5A36" aria-label="Orange"></button>
+            <button class="palette__dot" style="--c:#2D5BFF" data-color="#2D5BFF" aria-label="Blue"></button>
+            <button class="palette__dot" style="--c:#19A974" data-color="#19A974" aria-label="Green"></button>
+            <button class="palette__dot" style="--c:#E2A300" data-color="#E2A300" aria-label="Yellow"></button>
+            <button class="palette__dot" style="--c:#A93BD6" data-color="#A93BD6" aria-label="Purple"></button>
+          </div>
+        </div>
+
+        <div class="toolbar__divider"></div>
+
+        <div class="toolbar__group toolbar__group--brush">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="18" r="1.6"/><circle cx="12" cy="18" r="2.6"/><circle cx="19" cy="18" r="4"/></svg>
+          <input type="range" id="brushSize" min="1" max="60" value="4" aria-label="Brush size" />
+          <span class="brush-preview-box" title="Brush preview">
+            <span class="brush-preview-dot" id="brushPreviewDot"></span>
+          </span>
+          <span class="brush-size-label" id="brushSizeLabel">4px</span>
+        </div>
+
+        <div class="toolbar__divider"></div>
+
+        <div class="toolbar__group">
+          <button class="icon-btn" id="undoBtn" title="Undo (Ctrl+Z)" aria-label="Undo">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M3 13a9 9 0 1 0 3-7.7L3 7"/></svg>
+          </button>
+          <button class="icon-btn" id="redoBtn" title="Redo (Ctrl+Y)" aria-label="Redo">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M21 13a9 9 0 1 1-3-7.7L21 7"/></svg>
+          </button>
+          <button class="icon-btn icon-btn--danger" id="clearBtn" title="Clear canvas (Delete)" aria-label="Clear canvas">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+          </button>
+        </div>
+
+        <div class="toolbar__divider toolbar__divider--grow"></div>
+
+        <div class="toolbar__group">
+          <div class="dropdown" id="downloadDropdown">
+            <button class="btn btn--primary btn--sm" id="downloadBtn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+              Download
+            </button>
+            <div class="dropdown__menu" id="downloadMenu">
+              <button class="dropdown__item" data-format="png">as PNG</button>
+              <button class="dropdown__item" data-format="jpg">as JPG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canvas area -->
+      <div class="canvas-wrap">
+        <canvas id="drawCanvas" class="draw-canvas"></canvas>
+
+        <!-- Current tool indicator -->
+        <div class="tool-indicator" id="toolIndicator">
+          <span class="tool-indicator__dot"></span>
+          <span id="toolIndicatorLabel">Pen</span>
+        </div>
+
+        <!-- Floating action buttons -->
+        <div class="fab-stack">
+          <button class="fab" id="fabUndo" title="Undo">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M3 13a9 9 0 1 0 3-7.7L3 7"/></svg>
+          </button>
+          <button class="fab" id="fabRedo" title="Redo">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M21 13a9 9 0 1 1-3-7.7L21 7"/></svg>
+          </button>
+          <button class="fab fab--accent" id="fabDownload" title="Download PNG">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="stats-bar">
+        <div class="stat-pill">
+          <span class="stat-pill__label">Strokes</span>
+          <span class="stat-pill__value" id="statStrokes">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill__label">Tool</span>
+          <span class="stat-pill__value" id="statTool">Pen</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill__label">Time drawing</span>
+          <span class="stat-pill__value" id="statTime">00:00</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill__label">Color</span>
+          <span class="stat-pill__value stat-pill__value--color">
+            <span class="stat-pill__swatch" id="statColorSwatch"></span>
+            <span id="statColorText">#1A1A1A</span>
+          </span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill__label">Brush</span>
+          <span class="stat-pill__value" id="statBrush">4px</span>
+        </div>
+      </div>
+
+      <p class="board-hint">
+        <kbd>P</kbd> pen · <kbd>E</kbd> eraser · <kbd>L</kbd> line · <kbd>R</kbd> rect · <kbd>C</kbd> circle · <kbd>A</kbd> arrow ·
+        <kbd>Ctrl</kbd>+<kbd>Z</kbd> undo · <kbd>Ctrl</kbd>+<kbd>Y</kbd> redo · <kbd>Ctrl</kbd>+<kbd>S</kbd> save · <kbd>Delete</kbd> clear
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about" id="about">
+    <div class="about__inner">
+      <div class="about__visual" aria-hidden="true">
+        <svg viewBox="0 0 320 260" width="100%" height="100%">
+          <rect x="20" y="20" width="280" height="200" rx="14" class="about__panel" />
+          <path d="M50 160 Q90 60 140 130 T260 70" class="about__stroke about__stroke--1" />
+          <circle cx="230" cy="150" r="28" class="about__stroke about__stroke--2" />
+          <rect x="70" y="70" width="50" height="40" rx="6" class="about__stroke about__stroke--3" />
+        </svg>
+      </div>
+      <div class="about__copy">
+        <span class="eyebrow">How it's built</span>
+        <h2 class="section-title section-title--left">Powered by the HTML5 Canvas API</h2>
+        <p>
+          SketchSync draws every stroke directly onto a <code>&lt;canvas&gt;</code> element using vanilla JavaScript —
+          no frameworks, no libraries, no build step. When you press down, we start tracking a path of points;
+          as you move, line segments connect those points in real time using <code>lineTo()</code> and <code>stroke()</code>.
+        </p>
+        <p>
+          Shapes work differently: instead of permanently committing pixels on every frame, SketchSync redraws
+          the entire history on a buffer and previews the shape on top, so your rectangle or arrow follows your
+          cursor cleanly until you release the mouse. That snapshot-based approach is also what makes undo and redo
+          possible — every completed stroke is pushed onto a history stack you can travel through.
+        </p>
+        <ul class="about__list">
+          <li>Canvas resizes responsively while preserving your drawing.</li>
+          <li>Touch, mouse, and stylus input are all normalized into one coordinate system.</li>
+          <li>Your theme preference is remembered using <code>localStorage</code>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="#home" class="brand brand--footer">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="26" height="26" fill="none">
+              <path d="M6 30 Q14 8 20 20 T34 10" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <circle cx="34" cy="10" r="2.6" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="brand__name">SketchSync</span>
+        </a>
+        <p>A premium whiteboard for sketching ideas, built entirely with HTML, CSS, and vanilla JavaScript.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Navigate</h4>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#whiteboard">Whiteboard</a>
+        <a href="#about">About</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Resources</h4>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API" target="_blank" rel="noopener noreferrer">HTML5 Canvas</a>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JavaScript</a>
+        <a href="https://github.com/dakshatam21/SketchSync" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Keyboard</h4>
+        <span><kbd>Ctrl</kbd>+<kbd>Z</kbd> Undo</span>
+        <span><kbd>Ctrl</kbd>+<kbd>Y</kbd> Redo</span>
+        <span><kbd>Ctrl</kbd>+<kbd>S</kbd> Save</span>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 SketchSync. Built for people who think better with a pen in hand.</span>
+    </div>
+  </footer>
+
+  <!-- Toast notification container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
