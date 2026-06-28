@@ -1,5 +1,13 @@
 # ✏️ SketchSync – Interactive Whiteboard Tool
 
+Internship Details:-
+
+Intern ID: CITS5059
+Name: Dakshata Mhatre
+Duration: 4 Weeks
+Project: SketchSync – Interactive Whiteboard Tool
+Domain: Frontend Development
+
 A modern and responsive **Interactive Whiteboard Web Application** built using **HTML5, CSS3, JavaScript, and the HTML5 Canvas API**. SketchSync provides a smooth drawing experience with multiple drawing tools, customizable brush settings, undo/redo functionality, dark mode, and image export capabilities—all directly in the browser without requiring any installation.
 
 ---
